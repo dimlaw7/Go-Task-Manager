@@ -22,13 +22,21 @@ export const Modalform = ({ setModal, task, setTask, dispatch }) => {
             </div>
             <h4 className='title'>Add New Task</h4>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label htmlFor='add-task'>Task Title</label>
-                <input type='text' name='add-task' id='add-task' value={task} onChange={(e) => setTask(e.target.value)} />
-                <label htmlFor='status'>Task Status</label>
-                <select name='status' id='status'>
-                    <option value='Incomplete'>Incomplete</option>
-                    <option value='Complete'>Complete</option>
-                </select>
+                <label htmlFor='add-task'>Task Title
+                    <input type='text' name='add-task' id='add-task' value={task} onChange={(e) => setTask(e.target.value)} />
+                </label>
+                <label htmlFor='task-date'>Task Date
+                    <input type='date' name='task-date' id='task-date' />
+                </label>
+                <label htmlFor='task-date'>Task Date
+                    <input type='time' name='task-time' id='task-time' />
+                </label>
+                <label htmlFor='status'>Task Status
+                    <select name='status' id='status'>
+                        <option value='Incomplete'>Incomplete</option>
+                        <option value='Complete'>Complete</option>
+                    </select>
+                </label>
                 <button type='submit' className='submit-modal'>Submit</button>
             </form>
         </section>
