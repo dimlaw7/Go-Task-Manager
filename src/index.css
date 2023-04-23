@@ -16,6 +16,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media screen and (min-width: 768px) {
+  body {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -103,6 +110,10 @@ main {
   overflow: hidden;
 }
 
+.data-card > * {
+  position: relative;
+}
+
 .flash-display {
   position: absolute;
   height: 60px;
@@ -156,7 +167,7 @@ main {
 }
 
 .modal-form {
-  position: fixed;
+  position: absolute;
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   top: 50vh;
@@ -188,6 +199,11 @@ main {
   margin-bottom: 15px;
 }
 
+.modal-form .flex-input {
+  display: flex;
+  justify-content: space-between;
+}
+
 .tasks .info {
   display: flex;
   justify-content: space-between;
@@ -210,10 +226,12 @@ ul.task-list {
 ul.task-list li{
   display: flex;
   align-items: center;
+  background: #f6f6f6;;
   padding: 10px;
   box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 15px;
   border-radius: 10px;
+  border: 1px solid #ffffff;
 }
 
 ul.task-list .task-icon{
