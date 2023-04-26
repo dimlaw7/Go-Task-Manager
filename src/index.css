@@ -52,7 +52,7 @@ section.hero {
   font-size: 12px;
 }
 
-.splash-intro button {
+.splash-intro button, .submit-modal {
   margin-top: 50px;
   outline: none;
   border: none;
@@ -170,10 +170,11 @@ main {
   position: absolute;
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  top: 50vh;
+  top: 90px;
   left: 10px;
   right: 10px;
   padding: 15px;
+  z-index: 10;
 }
 
 .modal-form .close-modal {
@@ -204,6 +205,10 @@ main {
   justify-content: space-between;
 }
 
+section.tasks {
+  margin-bottom: 52px;
+}
+
 .tasks .info {
   display: flex;
   justify-content: space-between;
@@ -220,7 +225,9 @@ main {
 }
 
 ul.task-list {
-  padding: 0 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 6px;
 }
 
 ul.task-list li{
@@ -254,4 +261,28 @@ ul.task-list li div span{
   color: #cacaca;
   font-size: 13px;
   font-weight: 500;
+}
+
+ul.task-list li div.ic {
+  flex-grow: 0;
+}
+
+footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 12px 12px 0;
+}
+
+footer > * {
+  flex-grow: 1;
+  text-align: center;
+}
+
+footer .add-task {
+  position: relative;
+  bottom: 22px;
 }
