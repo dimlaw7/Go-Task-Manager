@@ -1,10 +1,12 @@
 import { useState, useReducer} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar,faMessage, faUser, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import listIcon from './listIcon.svg';
+import newIcon from './addnew.svg';
 //import { Modalform } from './Modalform';
 import { Header } from "./Header";
 import { Datacard } from "./Datacard";
+import { Modalform } from "./Modalform";
 
 
 const d = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000));
@@ -29,96 +31,69 @@ const reducer = (state, action) => {
                 endtime: action.payload.endtime,
                 status: action.payload.status
             }]
-            break;
+        case 'delete-task':
+            const copy = [...state].filter((todo,index) => index !== action.payload.id);
+            window.localStorage.setItem('initialTodos',JSON.stringify(copy));
+            return state.filter((todo,index) => index !== action.payload.id);
+        case 'edit-task':
+            window.localStorage.setItem('initialTodos',JSON.stringify(action.payload));
+            return [...action.payload];
+        case 'toggle-check':
+            return state.map((todo,index) =>  action.payload.id === index ? {
+                    ...todo,
+                    status: !todo.status
+                }
+                : { ...todo }
+            )
         default:
             return state;
-            break;
     }
 }
 
 const Homepage = () => {
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState({type: null, display: false});
     const [taskTitle, setTaskTitle] = useState('');
     const [taskDate, setTaskDate] = useState(todayIs);
     const [taskTime, setTaskTime] = useState(timeIs);
     const [taskTimeEnd, setTaskTimeEnd] = useState(timeIs);
     const [taskStatus, setTaskStatus] = useState('Incomplete');
     const [todos, dispatch] = useReducer(reducer, initialTodos());
-    const arrowRight = <FontAwesomeIcon icon={faAngleRight} />
-    const closeWindow = <FontAwesomeIcon icon={faWindowClose} />
-    function handleSubmit(e) {
+    const modalProps = {
+        taskTitle,
+        setTaskTitle,
+        taskDate,
+        setTaskDate,
+        taskTime,
+        setTaskTime,
+        taskTimeEnd,
+        setTaskTimeEnd,
+        taskStatus,
+        setTaskStatus,
+        dispatch,
+        modal,
+        setModal,
+        todos,
+    }
+    function handleDelete(e, index) {
         e.preventDefault();
-        const getTodos = window.localStorage.getItem('initialTodos');
-        if (getTodos) {
-            const initialTodos = JSON.parse(getTodos);
-            initialTodos.push({
-                title: taskTitle,
-                date: taskDate,
-                time: taskTime,
-                endtime: taskTimeEnd,
-                status: taskStatus
-            });
-            window.localStorage.setItem('initialTodos',JSON.stringify(initialTodos));
-        }
-        else{
-            window.localStorage.setItem('initialTodos',JSON.stringify([{
-                title: taskTitle,
-                date: taskDate,
-                time: taskTime,
-                endtime: taskTimeEnd,
-                status: taskStatus
-            }]));
-        }
         dispatch({
-            type: 'add-task',
+            type: 'delete-task',
             payload: {
-                title: taskTitle,
-                date: taskDate,
-                time: taskTime,
-                endtime: taskTimeEnd,
-                status: taskStatus
+                id: index
             }
-        });
-        setModal(false);
-        setTaskTitle('');
+        })
+    }
+    function handleEdit(e, todo, index) {
+        e.preventDefault();
+        setModal({type: 'edit-task', display: true, id: index});
+        setTaskTitle(todo.title);
     }
     return (
         <>
             <Header />
             <main>
-                <Datacard setModal={setModal} />
-                {modal && (
-                    <section className='modal-form'>
-                        <div className='close-modal' onClick={() => setModal(false)}>
-                            <span>{closeWindow}</span>
-                        </div>
-                        <h4 className='title'>Add New Task</h4>
-                        <form onSubmit={(e) => handleSubmit(e)}>
-                            <label htmlFor='add-task'>Task Title
-                                <input type='text' name='add-task' id='add-task' value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} autoComplete='off' />
-                            </label>
-                            <label htmlFor='task-date'>Task Date
-                                <input type='date' name='task-date' id='task-date' value={taskDate} onChange={(e) => setTaskDate(e.target.value)}/>
-                            </label>
-                            <div className="flex-input">
-                                <label htmlFor='task-date'>Start Time
-                                    <input type='time' name='task-time' id='task-time' value={taskTime} onChange={(e) => setTaskTime(e.target.value)} />
-                                </label>
-                                <label htmlFor='task-date'>End Time
-                                    <input type='time' name='task-time' id='task-time' value={taskTimeEnd} onChange={(e) => setTaskTimeEnd(e.target.value)} />
-                                </label>
-                            </div>
-                            <label htmlFor='status'>Task Status
-                                <select name='status' id='status' onChange={(e) => setTaskStatus(e.target.value)}>
-                                    <option value='Incomplete'>Incomplete</option>
-                                    <option value='Complete'>Complete</option>
-                                </select>
-                            </label>
-                            <button type='submit' className='submit-modal'>Submit</button>
-                        </form>
-                    </section>
-                )
-                }
+                <Datacard setModal={setModal} todos={todos} />
+                {modal.type && <Modalform {...modalProps} />}
                 <section className='tasks'>
                     <div className='info'>
                         <h3 className='title'>My Tasks</h3>
@@ -126,18 +101,28 @@ const Homepage = () => {
                     </div>
                     <div className='container'>
                         <ul className='task-list'>
-                            {todos.length ? todos.reverse().map((todo,index) => 
-                                <li key={index}>
+                            {todos.length ? todos.map((todo,index) => {
+                                //I used the equation in the KEY/ID below to undo the
+                                //effect of reverse() method on the index of the array
+                               // const realIndex = -(index - (todos.length-1));
+                                return (
+                                <li key={index} id={index}>
+                                    <input type="checkbox" name="toggle-check" onChange={() => dispatch({type: 'toggle-check', payload:{id: index}})} checked={todo.status}/>
                                     <div className='task-icon'>
                                         <img src={listIcon} alt='listIcon' width='30px' />
                                     </div>
                                     <div>
-                                        <h4>{todo.title}</h4>
+                                        <h4 style={{fontWeight: 500}}>{todo.title}</h4>
                                         <span>{todo.time} - {todo.endtime}</span>
                                     </div>
-                                    {arrowRight}
+                                    <div className="ic" onClick={(e) => {handleDelete(e, index)}}>
+                                        <FontAwesomeIcon icon={faTrash}/>
+                                    </div>
+                                    <div className="ic" onClick={(e) => {handleEdit(e, todo, index)}}>
+                                        <FontAwesomeIcon icon={faEdit}/>
+                                    </div>
                                 </li>
-                            )
+                            )})
                             :
                             (
                                 <>
@@ -150,6 +135,25 @@ const Homepage = () => {
                     </div>
                 </section>
             </main>
+            <footer>
+                <div>
+                <FontAwesomeIcon icon={faHome} style={{height: '15px', color: '#3586eb'}} />
+                </div>
+                <div>
+                <FontAwesomeIcon icon={faCalendar} style={{height: '15px', color: '#8F8F8F'}} />
+                </div>
+                <div>
+                    <div className='add-task' onClick={() => setModal({type: 'new-task', display: true,})}>
+                        <img src={newIcon} alt='listIcon' width='30px' />
+                    </div>
+                </div>
+                <div>
+                    <FontAwesomeIcon icon={faMessage} style={{height: '15px', color: '#8F8F8F'}} />
+                </div>
+                <div>
+                    <FontAwesomeIcon icon={faUser} style={{height: '15px', color: '#8F8F8F'}} />
+                </div>
+            </footer>
         </>
     )
 }
