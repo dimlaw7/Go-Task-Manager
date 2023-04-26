@@ -6,12 +6,10 @@ import Splashscreen from "./components/Splashscreen";
 function App() {
   const [ page, setPage ] = useState(true);
   useEffect(() => {
-    const getTodos = window.localStorage.getItem('initialTodos');
-    if (getTodos) {
-      const initialTodos = JSON.parse(getTodos);
-      if (initialTodos.length > 0) {
+    let initialTodos = window.localStorage.getItem('initialTodos');
+    initialTodos = JSON.parse(initialTodos);
+    if (initialTodos) {
         setPage(true);
-      }
     }
     else{
       setPage(false);
