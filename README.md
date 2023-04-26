@@ -6,13 +6,13 @@ This repo is a Task Management app. On this app user can manage and schedule the
 Snap Shots
 ===================================
 
-![App Splashscreen](screenshots/splashscreen.png "Splashscreen")
+![App Splashscreen](src/screenshots/splashscreen.png "Splashscreen")
 
-![App Homepage](screenshots/homepage.png "Homepage")
+![App Homepage](src/screenshots/homepage.png "Homepage")
 
-![App Progressbar](screenshots/progress-bar.png "Toggle Check to read progressbar")
+![App Progressbar](src/screenshots/progress-bar.png "Toggle Check to read progressbar")
 
-![Form Modal](screenshots/modal-page.png "Modal page")
+![Form Modal](src/screenshots/modal-page.png "Modal page")
 
 # Documentation
 
