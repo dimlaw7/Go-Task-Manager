@@ -1,0 +1,20 @@
+.Splashscreen {
+    display: flex;
+    min-height: 100vh;
+}
+
+.splash-intro {
+    display: flex;
+    padding: 0 40px;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero .img-container {
+    padding: 135px 40px;
+}
+
+section.hero {
+    background: linear-gradient(to bottom, #0052b8 13%, #0052b8 76%, #0052b8 55%, #eef5fd 109%);
+}

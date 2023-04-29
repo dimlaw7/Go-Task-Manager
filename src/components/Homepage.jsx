@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalendar,faMessage, faUser, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import listIcon from './listIcon.svg';
 import newIcon from './addnew.svg';
-//import { Modalform } from './Modalform';
 import { Header } from "./Header";
 import { Datacard } from "./Datacard";
 import { Modalform } from "./Modalform";
@@ -13,12 +12,19 @@ const d = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 6000
 const todayIs = d.toJSON().slice(0, 10);
 console.log(d.toJSON());
 const timeIs = d.toJSON().slice(11, 16);
+
 const initialTodos = () => {
     const getTodos = window.localStorage.getItem('initialTodos');
     if (getTodos) {
         return JSON.parse(getTodos)
     }
     return [];
+}
+
+const FILTER_MAP = {//Object to filter todos
+    All: () => true,
+    Incomplete: (todo) => !todo.status,
+    Complete: (todo) => todo.status,
 }
 
 const reducer = (state, action) => {
@@ -39,12 +45,15 @@ const reducer = (state, action) => {
             window.localStorage.setItem('initialTodos',JSON.stringify(action.payload));
             return [...action.payload];
         case 'toggle-check':
-            return state.map((todo,index) =>  action.payload.id === index ? {
+            const toggledArr = state.map((todo,index) =>  action.payload.id === index 
+                ? {
                     ...todo,
                     status: !todo.status
-                }
+                } 
                 : { ...todo }
             )
+            window.localStorage.setItem('initialTodos',JSON.stringify(toggledArr));
+            return toggledArr;
         default:
             return state;
     }
@@ -57,7 +66,9 @@ const Homepage = () => {
     const [taskTime, setTaskTime] = useState(timeIs);
     const [taskTimeEnd, setTaskTimeEnd] = useState(timeIs);
     const [taskStatus, setTaskStatus] = useState('Incomplete');
+    const [filter, setFilter] = useState('All');
     const [todos, dispatch] = useReducer(reducer, initialTodos());
+
     const modalProps = {
         taskTitle,
         setTaskTitle,
@@ -74,6 +85,7 @@ const Homepage = () => {
         setModal,
         todos,
     }
+
     function handleDelete(e, index) {
         e.preventDefault();
         dispatch({
@@ -83,11 +95,13 @@ const Homepage = () => {
             }
         })
     }
+
     function handleEdit(e, todo, index) {
         e.preventDefault();
         setModal({type: 'edit-task', display: true, id: index});
         setTaskTitle(todo.title);
     }
+    
     return (
         <>
             <Header />
@@ -97,14 +111,18 @@ const Homepage = () => {
                 <section className='tasks'>
                     <div className='info'>
                         <h3 className='title'>My Tasks</h3>
-                        <span className='aside'>See All</span>
+                        <span className='aside'>
+                            <label htmlFor="sort-todo">Filter:   </label>
+                            <select className='sort-todo' onChange={(e) => {setFilter(e.target.value)}}>
+                                <option value="All">All</option>
+                                <option value="Complete">Complete</option>
+                                <option value="Incomplete">Incomplete</option>
+                            </select>
+                        </span>
                     </div>
                     <div className='container'>
                         <ul className='task-list'>
-                            {todos.length ? todos.map((todo,index) => {
-                                //I used the equation in the KEY/ID below to undo the
-                                //effect of reverse() method on the index of the array
-                               // const realIndex = -(index - (todos.length-1));
+                            {todos.length ? todos.filter(FILTER_MAP[filter]).map((todo,index) => {
                                 return (
                                 <li key={index} id={index}>
                                     <input type="checkbox" name="toggle-check" onChange={() => dispatch({type: 'toggle-check', payload:{id: index}})} checked={todo.status}/>
@@ -122,8 +140,7 @@ const Homepage = () => {
                                         <FontAwesomeIcon icon={faEdit}/>
                                     </div>
                                 </li>
-                            )})
-                            :
+                            )}) :
                             (
                                 <>
                                     <br/><br/>
