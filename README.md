@@ -3,6 +3,10 @@ Hi there! 👋
 
 This repo is a Task Management app. On this app user can manage and schedule their taks. I hope you like it and give me feedback if you wish.
 
+DEMO
+==========
+Check out the demo on my Codepen https://dimlaw7.github.io/Go-Task-Manager/
+
 Snap Shots
 ===================================
 
