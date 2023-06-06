@@ -12,12 +12,15 @@ export const Datacard = ({ setModal, todos }) => {
                 <div className='flash-display'></div>
                 <h4 className='title'>Today's Project Summary</h4>
                 <span className='summary'>{todos.length} Tasks</span>
-                <div className='progress-bar'>
-                    <span className='title'>Progress</span>
-                    <span className='summary'>{isNaN(progress) ? '0' : progress}% complete</span>
-                    <progress id="file" value={progress} max="100"> </progress>
+                <div className='card-methods'>
+                    <div className='progress-bar'>
+                        <span className='title'>Progress</span>
+                        <span className='summary'>{isNaN(progress) ? '0' : progress}% complete</span>
+                        <progress id="file" value={progress} max="100"> </progress>
+                    </div>
+                    <div className='add-task' onClick={() => setModal({type: 'new-task', display: true,})}>{plusIcon}</div>
                 </div>
-                <div className='add-task' onClick={() => setModal({type: 'new-task', display: true,})}>{plusIcon}</div>
+                
             </div>
         </section>
     )

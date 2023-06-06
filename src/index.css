@@ -48,7 +48,7 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0;
 }
 
-input {
+input, select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -169,6 +169,7 @@ main {
 .data-card .progress-bar {
   display: flex;
   flex-wrap: wrap;
+  width: 70%;
 }
 
 .data-card .progress-bar .title{
@@ -247,6 +248,7 @@ section.tasks {
   align-items: center;
   margin: 0.8em 0;
   padding: 1em;
+  border-bottom: 5px solid #efefef;
 }
 
 .tasks h1 {
@@ -333,6 +335,14 @@ footer .add-task {
   cursor: pointer;
 }
 
+.card-methods {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+  position: relative;
+  bottom: -32px;
+}
 
 @media screen and (min-width: 768px) {
   footer {
