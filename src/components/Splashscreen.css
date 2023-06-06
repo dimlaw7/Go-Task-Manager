@@ -1,6 +1,8 @@
 .Splashscreen {
     display: flex;
     min-height: 100vh;
+    flex-direction: column;
+    gap: 3em;
 }
 
 .splash-intro {
@@ -11,10 +13,18 @@
     justify-content: center;
 }
 
-.hero .img-container {
-    padding: 135px 40px;
-}
 
 section.hero {
     background: linear-gradient(to bottom, #0052b8 13%, #0052b8 76%, #0052b8 55%, #eef5fd 109%);
+}
+
+@media screen and (min-width: 768px) {
+    .Splashscreen {
+        flex-direction: row;
+        gap: 0;
+    }
+
+    .hero .img-container {
+        padding: 135px 40px;
+    }
 }

@@ -142,11 +142,11 @@ const Homepage = () => {
                                 </li>
                             )}) :
                             (
-                                <>
+                                <div style={{background: "aliceblue", padding: "1em"}}>
                                     <br/><br/>
                                     <h4>You have not added a task to manage</h4>
                                     <p>Click the button in the blue card above to begin</p>
-                                </>
+                                </div>
                             )}
                         </ul>
                     </div>
