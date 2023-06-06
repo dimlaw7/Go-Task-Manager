@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Go-Task-Manager/static/css/main.c6aa77e3.css",
-    "main.js": "/Go-Task-Manager/static/js/main.504daca8.js",
+    "main.css": "/Go-Task-Manager/static/css/main.e898bda2.css",
+    "main.js": "/Go-Task-Manager/static/js/main.889a1684.js",
     "static/js/787.63e47474.chunk.js": "/Go-Task-Manager/static/js/787.63e47474.chunk.js",
     "static/media/task2.svg": "/Go-Task-Manager/static/media/task2.da17f050351d937debf2dc88314bc147.svg",
     "static/media/listIcon.svg": "/Go-Task-Manager/static/media/listIcon.46109a7ac8ad9533fc163d1d731de38e.svg",
-    "static/media/addnew.svg": "/Go-Task-Manager/static/media/addnew.3c927fc9801f592d85f9fdb3bb5df3e5.svg",
     "index.html": "/Go-Task-Manager/index.html",
-    "main.c6aa77e3.css.map": "/Go-Task-Manager/static/css/main.c6aa77e3.css.map",
-    "main.504daca8.js.map": "/Go-Task-Manager/static/js/main.504daca8.js.map",
+    "static/media/addnew.svg": "/Go-Task-Manager/static/media/addnew.3c927fc9801f592d85f9fdb3bb5df3e5.svg",
+    "main.e898bda2.css.map": "/Go-Task-Manager/static/css/main.e898bda2.css.map",
+    "main.889a1684.js.map": "/Go-Task-Manager/static/js/main.889a1684.js.map",
     "787.63e47474.chunk.js.map": "/Go-Task-Manager/static/js/787.63e47474.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c6aa77e3.css",
-    "static/js/main.504daca8.js"
+    "static/css/main.e898bda2.css",
+    "static/js/main.889a1684.js"
   ]
 }
