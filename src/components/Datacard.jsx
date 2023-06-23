@@ -10,7 +10,7 @@ export const Datacard = ({ setModal, todos }) => {
         <section className='data-card-sect'>
             <div className='data-card'>
                 <div className='flash-display'></div>
-                <h4 className='title'>Today's Project Summary</h4>
+                <h4 className='title'>Your Project Summary</h4>
                 <span className='summary'>{todos.length} Tasks</span>
                 <div className='card-methods'>
                     <div className='progress-bar'>
