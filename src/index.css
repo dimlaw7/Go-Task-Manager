@@ -54,6 +54,11 @@ input, select {
   appearance: auto;
 }
 
+input[type=date], input[type=time], select {
+  background-color: #fff;
+  border: 1px solid 1px solid rgba(0,0,0,0.5);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
