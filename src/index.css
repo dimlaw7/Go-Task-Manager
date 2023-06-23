@@ -56,7 +56,8 @@ input, select {
 
 input[type=date], input[type=time], select {
   background-color: #fff;
-  border: 1px solid 1px solid rgba(0,0,0,0.5);
+  border: 1px solid rgba(0,0,0,0.5);
+  padding: 1em;
 }
 
 code {
@@ -96,7 +97,7 @@ section.hero {
   padding: 10px 0;
   color: #fff;
   border-radius: 10px;
-  font-size: 1.28em;
+  font-size: 1em;
 }
 
 /*Homepage component css*/
