@@ -1,0 +1,26 @@
+.sidebar {
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid #efefef;
+    width: 0;
+    padding: 0;
+    height: 0;
+    top: 74px;
+    z-index: 99;
+    display: block;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+.sidebar ul li {
+    padding: 0.5em;
+}
+
+.sidebar ul li:hover {
+    background-color: #efefef;
+}
+
+a {
+    color: #0c5bc4;
+    text-decoration: none;
+}
