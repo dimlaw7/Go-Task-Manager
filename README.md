@@ -1,7 +1,6 @@
 # Go Task Manager App
-Hi there! 👋
 
-This repo is a Task Management app. On this app user can manage and schedule their taks. I hope you like it and give me feedback if you wish.
+This repo contains files for a user friendly and interactive CRUD web application I developed for Personal Task Management. On this app user can manage and schedule their tasks. It also has feature to sort complete and incomplete tasks.
 
 DEMO
 ==========
