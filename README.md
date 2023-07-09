@@ -1,6 +1,6 @@
 # Go Task Manager App
 
-This repo contains files for a user friendly and interactive CRUD web application I developed for Personal Task Management. On this app user can manage and schedule their tasks. It also has feature to sort complete and incomplete tasks.
+This repo contains files for a user friendly and interactive CRUD web application tat I developed for Personal Task Management. On this app user can manage and schedule their tasks. It also has feature to sort complete and incomplete tasks.
 
 DEMO
 ==========
